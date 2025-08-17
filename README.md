@@ -5,6 +5,30 @@ Get started building a [Computer Using Agent (CUA)](https://platform.openai.com/
 > [!CAUTION]  
 > Computer use is in preview. Because the model is still in preview and may be susceptible to exploits and inadvertent mistakes, we discourage trusting it in authenticated environments or for high-stakes tasks.
 
+## Multi-Agent System
+
+This repository now supports **four specialized agent types**:
+
+- **🤖 CUA Agent** - Base computer control and automation
+- **🔍 Deep Researcher** - Research and information gathering specialist
+- **💻 Developer** - Software development and debugging specialist  
+- **👤 User Agent** - Personal productivity and task automation specialist
+
+### Quick Start with Agents
+
+```bash
+# Automated installation of all agents
+python install_agents.py
+
+# Run different agent types
+python cli.py --agent-type cua              # Base computer control
+python cli.py --agent-type deep_researcher  # Research specialist
+python cli.py --agent-type developer        # Development specialist
+python cli.py --agent-type user            # User assistance specialist
+```
+
+📋 **[Installation Checklist](INSTALLATION_CHECKLIST.md)** | 📖 **[Detailed Installation Guide](AGENT_INSTALLATION_GUIDE.md)**
+
 ## Set Up & Run
 
 Set up python env and install dependencies.

@@ -140,3 +140,17 @@ class Agent:
                     new_items += self.handle_item(item)
 
         return new_items
+
+    def get_agent_type(self):
+        """Return the agent type identifier."""
+        return "cua"
+        
+    def get_capabilities(self):
+        """Return list of agent capabilities."""
+        return [
+            "Computer screen analysis and interaction",
+            "Mouse and keyboard automation",
+            "Web browsing and navigation",
+            "Application control and automation",
+            "Screenshot analysis and decision making"
+        ]

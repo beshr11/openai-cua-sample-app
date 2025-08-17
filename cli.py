@@ -1,5 +1,5 @@
 import argparse
-from agent.agent import Agent
+from agent import AGENT_TYPES
 from computers.config import *
 from computers.default import *
 from computers import computers_config
@@ -14,7 +14,13 @@ def acknowledge_safety_check_callback(message: str) -> bool:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Select a computer environment from the available options."
+        description="OpenAI CUA Multi-Agent System - Select agent type and computer environment."
+    )
+    parser.add_argument(
+        "--agent-type",
+        choices=AGENT_TYPES.keys(),
+        help="Choose the agent type to use.",
+        default="cua",
     )
     parser.add_argument(
         "--computer",
@@ -45,10 +51,26 @@ def main():
         default="https://bing.com",
     )
     args = parser.parse_args()
+    
+    # Get the appropriate agent and computer classes
+    AgentClass = AGENT_TYPES[args.agent_type]
     ComputerClass = computers_config[args.computer]
+    
+    # Print agent information
+    print(f"🤖 Starting {args.agent_type.upper()} Agent")
+    print(f"💻 Using {args.computer} computer environment")
+    
+    # Create a temporary agent to show capabilities
+    temp_agent = AgentClass()
+    if hasattr(temp_agent, 'get_capabilities'):
+        capabilities = temp_agent.get_capabilities()
+        print(f"🎯 Agent Capabilities:")
+        for i, capability in enumerate(capabilities, 1):
+            print(f"   {i}. {capability}")
+    print()
 
     with ComputerClass() as computer:
-        agent = Agent(
+        agent = AgentClass(
             computer=computer,
             acknowledge_safety_check_callback=acknowledge_safety_check_callback,
         )
